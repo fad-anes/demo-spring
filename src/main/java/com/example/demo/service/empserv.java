@@ -13,7 +13,9 @@ public class empserv {
     private empRepo empRepo;
     public employee getUser(Integer id){
         Optional<employee> emp =this.empRepo.findById(id);
-        return  emp.orElse(new employee());
-
+        return  emp.orElse(null);
+    }
+    public employee save(employee employee){
+        return this.empRepo.save(employee);
     }
 }
