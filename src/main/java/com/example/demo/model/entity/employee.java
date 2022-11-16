@@ -1,52 +1,34 @@
 package com.example.demo.model.entity;
 
+import com.example.demo.model.dto.empdto;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.SQLUpdate;
 
 
 import javax.persistence.*;
 
-
+@Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class employee {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+
     private Integer id;
     private String name;
     private String prename;
     private Double salary;
 
-    public employee() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPrename() {
-        return prename;
-    }
-
-    public void setPrename(String prename) {
-        this.prename = prename;
-    }
-
-    public Double getSalary() {
-        return salary;
-    }
-
-    public void setSalary(Double salary) {
-        this.salary = salary;
+    public static employee toEntity(empdto dto){
+        return employee.builder()
+                .id(dto.getId())
+                .name(dto.getName())
+                .prename(dto.getPrename())
+                .salary(dto.getSalary())
+                .build();
     }
 }
